@@ -9,7 +9,6 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="listart.php">Art Listing</a></li>
     <li><a href="trackAndTrace.html">Track & Trace</a></li>
-    <li><a href="admin.php">Admin</a></li>
 </ul>
 
 <h1>Place an Order</h1>
@@ -43,27 +42,11 @@ if (empty($name) || empty($email) || empty($phone) || empty($address)) {
 <!--TODO Could implement grid over here-->
 
 <form method="post">
-    <table>
-        <tr>
-            <td for="name">Name:</td>
-            <td><input type="text" id="name" name="name"/></td>
-        </tr>
-        <tr>
-            <td for="phone">Phone number:</td>
-            <td><input type="text" id="phone" name="phone"/></td>
-        </tr>
-        <tr>
-            <td for="email">Email:</td>
-            <td><input type="text" id="email" name="email"/></td>
-        </tr>
-        <tr>
-            <td for="address">Postal address:</td>
-            <td><input type="text" id="address" name="address"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Order"></td>
-        </tr>
-    </table>
+    <p><label for="name">Name:<input type="text" id="name" name="name"/></label></p>
+    <p><label for="phone">Phone number:<input type="text" id="phone" name="phone"/></label></p>
+    <p><label for="email">Email:<input type="text" id="email" name="email"/></label></p>
+    <p><label for="address">Postal address:<input type="text" id="address" name="address"/></label></p>
+    <p><input type="submit" value="Order"></p>
     <?php
     } else {
         $sql = "INSERT INTO `ArtworkSystemOrders` (`userName`, `phone`, `email`, `address`, `paintingName`, `paintingID`) VALUES ('$name', '$phone', '$email', '$address', '$paintingName', '$paintingID')";

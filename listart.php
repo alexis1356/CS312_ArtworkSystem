@@ -8,10 +8,10 @@
         // let id = document.getElementById("orderButton").value;
         function order(id) {
             //    if (id) {
-            window.location = "order.php?id=" + id;
+           return  window.location = "order.php?id=" + id;
             //     }
 
-        };
+        }
     </script>
 </head>
 <body>
@@ -19,7 +19,6 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="listart.php">Art Listing</a></li>
     <li><a href="trackAndTrace.html">Track & Trace</a></li>
-    <li><a href="admin.php">Admin</a></li>
 </ul>
 <h1>Art Listing</h1>
 <?php
