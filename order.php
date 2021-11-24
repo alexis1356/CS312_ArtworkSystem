@@ -8,34 +8,12 @@
 <ul id="navBar">
     <li><a href="index.html">Home</a></li>
     <li><a href="listart.php">Art Listing</a></li>
-    <li><a href="trackAndTrace.html">Track & Trace</a></li>
+    <li><a href="trackAndTrace.php">Track & Trace</a></li>
 </ul>
 <h1>Place an Order</h1>
 <?php
-$paintingID = isset($_GET['id']) ? $_GET['id'] : "";
-
-require_once "/home/cxb19183/DEVWEB/2021/functions/pass.php";
-
-// connect to MySQL
-$host = "devweb2021.cis.strath.ac.uk";
-$user = "cxb19183";
-$password = get_cxb_19183_pass();
-$dbname = "cxb19183";
-$conn = new mysqli($host, $user, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Unable to connect to database.");
-}
-$sql = "SELECT `name` FROM `ArtworkSystemArt` WHERE `id` = $paintingID";
-
-// Handle results
-$result = $conn->query($sql);
-if (!$result) {
-    die("No results were retrieved.");
-}
-$paintingName = $result->fetch_assoc()["name"];
-// Disconnect
-$conn->close();
+$paintingID = isset($_GET['id']) ? strip_tags($_GET['id']) : "";
+$paintingName = isset($_GET['name']) ? strip_tags($_GET['name']) : "";
 
 echo "<h3>Selected painting ID is $paintingID and name is  $paintingName</h3>";
 ?>

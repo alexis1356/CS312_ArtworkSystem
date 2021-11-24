@@ -8,7 +8,7 @@
 <ul id="navBar">
     <li><a href="index.html">Home</a></li>
     <li><a href="listart.php">Art Listing</a></li>
-    <li><a href="trackAndTrace.html">Track & Trace</a></li>
+    <li><a href="trackAndTrace.php">Track & Trace</a></li>
 </ul>
 
 <h1>Place an Order</h1>
@@ -53,9 +53,9 @@ if (empty($name) || empty($email) || empty($phone) || empty($address)) {
         $result = $conn->query($sql);
         if (!$result) {
             die("Failed to insert.");
+        }else{
+            echo "Thank you for ordering my art. You will receive an email once it will be sent.";
         }
-        header("location: index.html");
-        //need to execute query duuh
     }
     // Disconnect
     $conn->close();

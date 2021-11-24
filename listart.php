@@ -3,22 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Art Listing</title>
-    <script>
-        //    document.getElementById("orderButton").onclick = function () {
-        // let id = document.getElementById("orderButton").value;
-        function order(id) {
-            //    if (id) {
-           return  window.location = "order.php?id=" + id;
-            //     }
-
-        }
-    </script>
 </head>
 <body>
 <ul id="navBar">
     <li><a href="index.html">Home</a></li>
     <li><a href="listart.php">Art Listing</a></li>
-    <li><a href="trackAndTrace.html">Track & Trace</a></li>
+    <li><a href="trackAndTrace.php">Track & Trace</a></li>
 </ul>
 <h1>Art Listing</h1>
 <?php
@@ -31,10 +21,30 @@ $password = get_cxb_19183_pass();
 $dbname = "cxb19183";
 $conn = new mysqli($host, $user, $password, $dbname);
 
+
 if ($conn->connect_error) {
     die("Unable to connect to database.");
 }
-$sql = "SELECT * FROM `ArtworkSystemArt`";
+$countRows = "SELECT count(*) FROM `ArtworkSystemArt`";
+$result = $conn->query($countRows);
+if (!$result) {
+    die("Cannot count number of rows.");
+}
+$numberOfRows = $result->fetch_row()[0];
+
+
+$pagination = 12;
+//$lastpage = ceil($numberOfRows / $pagination);
+//$pageno = 0;
+//if ($pageno > $lastpage) {
+//    $pageno = $lastpage;
+//} // if
+//if ($pageno < 1) {
+//    $pageno = 1;
+//} // if
+//$limit = 'LIMIT ' . ($pageno - 1) * $pagination . ',' . $pagination;
+
+$sql = "SELECT * FROM `ArtworkSystemArt` ";
 
 // Handle results
 $result = $conn->query($sql);
@@ -43,36 +53,28 @@ if (!$result) {
 }
 
 if ($result->num_rows > 0) {
-?>
-<table>
+    echo "<table>";
+    ?>
+
     <tr>
         <th>Name</th>
-        <th>Date</th>
-        <th>Width(mm)</th>
-        <th>Height(mm)</th>
         <th>Price</th>
-        <th>Description</th>
-        <th>ID</th>
         <th></th>
     </tr>
     <?php
     while ($row = $result->fetch_assoc()) {
-        //  $days = strtotime($row["time"]) / 86400;
-
         echo "<tr>\n";
         echo "<td>" . $row["name"] . "</td>\n";
-        echo "<td>" . $row["date"] . "</td>\n";
-        echo "<td>" . $row["width"] . "</td>\n";
-        echo "<td>" . $row["height"] . "</td>\n";
         echo "<td>" . $row["price"] . "</td>\n";
-        echo "<td>" . $row["description"] . "</td>\n";
-        echo "<td>" . $row["id"] . "</td>\n";
-        echo "<td><button onclick='order(" . $row["id"] . ")'>Order</button></td>";
-        echo "</tr>\n";
-
+        ?>
+        <td>
+            <button onclick="location.href='artDetails.php?id=<?php echo $row["id"]; ?>'">More</button>
+        </td>
+        </tr>
+        <?php
     }
     echo "</table>\n";
-    }
-    ?>
+}
+?>
 </body>
 </html>
