@@ -60,6 +60,7 @@ if ($_SESSION["pass"]) {
             if (!$result1) {
                 die("Could not add a painting to the database.");
             }
+            echo "Uploaded successfully.";
         } else {
             echo "Please fill in all fields correctly.";
         }

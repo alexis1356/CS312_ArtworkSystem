@@ -161,6 +161,7 @@ table button:hover, input[type=submit]:hover{
     text-transform: uppercase;
 }
 
+/* Art details page */
 #artDetails{
     display: inline;
 }
@@ -184,4 +185,11 @@ table button:hover, input[type=submit]:hover{
     margin: 1vmin;
     border: 0;
     border-radius: 1vmin;
+}
+
+/* Thumbnail for art listing page*/
+
+#thumbNail{
+    padding: 1vmin;
+    max-width: 10vmin;
 }
