@@ -1,0 +1,188 @@
+body {
+    background-color: #EFE2BA;
+    color: #3A3B3C;
+    font-family: Arial Calibri Cambria, sans-serif;
+}
+
+#navBar {
+    background-color: #4056A1;
+    padding: 2vmin;
+}
+
+#navBar ul {
+    display: inline;
+    list-style-type: none;
+}
+
+#navBar li {
+    float: left;
+    margin-left: 3vmin;
+    font-size: 1.1em;
+
+}
+
+#navBar li a {
+    text-decoration: none;
+    color: #f8eeda;
+}
+
+#navBar li a:hover, .active {
+    color: #f8f2f2;
+    padding: 1vmin;
+    background: #798fcc;
+}
+
+#index {
+    margin: 2vmin 10vmin 2vmin 3vmin;
+}
+
+h1 {
+    color: #F13C20;
+    font-size: 6vmin;
+    text-align: center;
+}
+
+h3 {
+    padding-left: 2vmin;
+}
+
+#index img{
+    max-width: 40%;
+    float: right;
+    clear: both;
+}
+
+#index p{
+    background-color: #fcf5ea;
+    border: 1vmin solid #d3d1d1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    max-width: 50%;
+    padding: 5vmin;
+    display: block;
+    overflow: auto;
+}
+/* used code for styling forms from https://webdesign.tutsplus.com/tutorials/how-to-build-web-form-layouts-with-css-grid--cms-28776 */
+form {
+    display: grid;
+    padding: 1em;
+    background: #fcf5ea;
+    border: 1vmin solid #d3d1d1;
+    margin: 2vmin auto 0 auto;
+    max-width: 60%;
+    padding: 1em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+#adminLogin{
+    display: block;
+    padding: 1em;
+    background: #fcf5ea;
+    border: 1vmin solid #d3d1d1;
+    margin: 2vmin auto 0 auto;
+    max-width: 40%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+#adminLogin input{
+    margin: 2vmin;
+    max-width: 20vmin;
+}
+
+label {
+    padding: 0.5vmin;
+}
+
+input {
+    padding: 0.7em;
+    margin-bottom: 0.5em;
+}
+
+@media (min-width: 40vmin) {
+    label {
+        text-align: left;
+        grid-column: 1 / 2;
+    }
+
+    input {
+        grid-column: 2 / 3;
+    }
+}
+
+input:focus {
+    background-color: #e6f2f5;
+}
+
+input[type=submit] {
+    background: #e7a525;
+    padding: 1.5vmin;
+    width: 50%;
+    border: 0;
+    border-radius: 1vmin;
+}
+
+/*Styling tables*/
+table {
+    border-collapse: collapse;
+    margin: 2vmin auto 0 auto;
+    font-size: 2vmin;
+    min-width: 60%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table th{
+    padding: 2vmin;
+    text-align: left;
+}
+table td {
+    padding: 12px 15px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #d3d1d1;
+}
+
+table tbody tr {
+    background-color: #fcf5ea;
+}
+
+table button {
+    background: #e7a525;
+    padding: 1vmin;
+    border: 0;
+    border-radius: 1vmin;
+}
+
+table button:hover, input[type=submit]:hover{
+    background: #ebb750;
+}
+
+.adminTable h3{
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#artDetails{
+    display: inline;
+}
+
+#artDetails img{
+    float: left;
+    padding: 0 2vmin 2vmin;
+    min-width: 65%;
+}
+
+#artDetails table{
+    min-width: 30%;
+    margin: 2vmin 2vmin 2vmin 2vmin;
+
+}
+
+#artDetails button{
+    background: #e7a525;
+    float: bottom;
+    padding: 2vmin;
+    margin: 1vmin;
+    border: 0;
+    border-radius: 1vmin;
+}

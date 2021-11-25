@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Art Listing</title>
+    <link rel="stylesheet" href="styleSheet.css">
 </head>
 <body>
-<ul id="navBar">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="listart.php">Art Listing</a></li>
-    <li><a href="trackAndTrace.php">Track & Trace</a></li>
-</ul>
+<nav id="navBar">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listart.php" class="active">Art Listing</a></li>
+        <li><a href="trackAndTrace.php">Track & Trace</a></li>
+    </ul>
+</nav>
 <h1>Art Listing</h1>
 <?php
 require_once "/home/cxb19183/DEVWEB/2021/functions/pass.php";

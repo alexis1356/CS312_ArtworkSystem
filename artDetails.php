@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Art Listing</title>
+    <link rel="stylesheet" href="styleSheet.css">
     <script>
         function order(id) {
             return window.location = "order.php?id=" + id;
@@ -10,14 +11,16 @@
     </script>
 </head>
 <body>
-<ul id="navBar">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="listart.php">Art Listing</a></li>
-    <li><a href="trackAndTrace.php">Track & Trace</a></li>
-</ul>
+<nav id="navBar">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listart.php" class="active">Art Listing</a></li>
+        <li><a href="trackAndTrace.php">Track & Trace</a></li>
+    </ul>
+</nav>
 <h1>Art Details</h1>
 <?php
-$paintingID= isset($_GET['id']) ? strip_tags($_GET['id']) : "";
+$paintingID = isset($_GET['id']) ? strip_tags($_GET['id']) : "";
 
 require_once "/home/cxb19183/DEVWEB/2021/functions/pass.php";
 
@@ -40,24 +43,42 @@ if (!$result) {
 }
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $imageForDisplay = base64_encode($row["image"]);
     ?>
     <div id="artDetails">
-        <h5>ID</h5>
-        <p><?php echo $row["id"];?></p>
-        <h5>Name</h5>
-        <p><?php echo $row["name"];?></p>
-        <h5>Width <p>(mm)</p></h5>
-        <p><?php echo $row["width"];?></p>
-        <h5>Height <p>(mm)</p></h5>
-        <p><?php echo $row["height"];?></p>
-        <h5>Price</h5>
-        <p><?php echo $row["price"];?></p>
-        <h5>Description</h5>
-        <p><?php echo $row["description"];?></p>
-        <button onclick="location.href='order.php?id=<?php echo $row["id"]; ?>&name=<?php echo $row["name"]; ?>'">Order</button>
+        <img src="data:image/*;base64,<?php echo $imageForDisplay; ?>" alt="<?php echo $row["name"]; ?>">
+        <table>
+            <tr>
+                <td><h5>ID</h5></td>
+                <td><?php echo $row["id"]; ?></td>
+            </tr>
+            <tr>
+                <td><h5>Name</h5></td>
+                <td><?php echo $row["name"]; ?></td>
+            </tr>
+            <tr>
+                <td><h5>Width (mm)</h5></td>
+                <td><?php echo $row["width"]; ?></td>
+            </tr>
+            <tr>
+                <td><h5>Height (mm)</h5></td>
+                <td><?php echo $row["height"]; ?></td>
+            </tr>
+            <tr>
+                <td><h5>Price (£)</h5></td>
+                <td><?php echo $row["price"]; ?></td>
+            </tr>
+            <tr>
+                <td><h5>Description</h5></td>
+                <td><?php echo $row["description"]; ?></td>
+            </tr>
+        </table>
+        <button onclick="location.href='order.php?id=<?php echo $row["id"]; ?>&name=<?php echo $row["name"]; ?>'">
+            Order
+        </button>
         <button onclick="location.href='listart.php'">Back</button>
     </div>
-<?php
+    <?php
 }
 
 ?>

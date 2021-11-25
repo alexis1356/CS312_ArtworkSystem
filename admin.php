@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
+    <link rel="stylesheet" href="styleSheet.css">
 </head>
 <body>
-<ul id="navBar">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="listart.php">Art Listing</a></li>
-    <li><a href="trackAndTrace.php">Track & Trace</a></li>
-    <!--    add session token to memorize password-->
-</ul>
+<nav id="navBar">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listart.php">Art Listing</a></li>
+        <li><a href="trackAndTrace.php">Track & Trace</a></li>
+        <li><a href="admin.php" class="active">Admin</a></li>
+    </ul>
+</nav>
 <h1>Admin page</h1>
 <?php
 session_start();
@@ -43,31 +46,32 @@ if ($_SESSION["pass"]) {
     $height = isset($_POST["height"]) ? $conn->real_escape_string($_POST["height"]) : "";
     $price = isset($_POST["price"]) ? $conn->real_escape_string($_POST["price"]) : "";
     $description = isset($_POST["description"]) ? $conn->real_escape_string($_POST["description"]) : "";
-// $image = isset($_POST["myimage"]) ?$_POST["myimage"]:"";
-
-// Add new painting
-    if (!empty($name) && !empty($width) && !empty($height) && !empty($price) && !empty($description) && filesize($_FILES['myimage']['tmp_name'])) {
-        $image = addslashes(file_get_contents($_FILES['myimage']['tmp_name']));
-        $sqlAddPainting = "INSERT INTO `ArtworkSystemArt` (`id`, `date`, `name`, `width`, `height`, `price`, `description`, `image`) VALUES (NULL, CURRENT_TIMESTAMP, '$name', '$width', '$height', '$price', '$description', '$image')";
-        $result1 = $conn->query($sqlAddPainting);
-        if (!$result1) {
-            die("Could not add a painting to the database.");
-        }
-    } else {
-        echo "Please fill in all fields correctly.";
-    }
 
     ?>
-    <!-- TODO javascript checing to make sure that all fields are filled in-->
-    <h3>Add a painting</h3>
     <form method="post" id="addImage" enctype="multipart/form-data">
-        <p><label for="paintingName">Name:</label><input type="text" id="paintingName" name="paintingName"/></p>
-        <p><label for="width">Width:</label><input type="text" id="width" name="width"/></p>
-        <p><label for="height">Height:</label><input type="text" id="height" name="height"/></p>
-        <p><label for="price">Price:</label><input type="text" id="price" name="price"/></p>
-        <p><label for="description">Description:</label><textarea id="description" name="description"></textarea></p>
-        <p><input type="file" name="myimage" accept="image/*"></p>
-        <p><input type="submit" value="Submit"></p>
+        <h3>Add a painting</h3>
+        <?php
+
+        // Add new painting
+        if (!empty($name) && !empty($width) && !empty($height) && !empty($price) && !empty($description) && filesize($_FILES['myimage']['tmp_name'])) {
+            $image = addslashes(file_get_contents($_FILES['myimage']['tmp_name']));
+            $sqlAddPainting = "INSERT INTO `ArtworkSystemArt` (`id`, `date`, `name`, `width`, `height`, `price`, `description`, `image`) VALUES (NULL, CURRENT_TIMESTAMP, '$name', '$width', '$height', '$price', '$description', '$image')";
+            $result1 = $conn->query($sqlAddPainting);
+            if (!$result1) {
+                die("Could not add a painting to the database.");
+            }
+        } else {
+            echo "Please fill in all fields correctly.";
+        }
+
+        ?>
+        <label for="paintingName">Name:</label><input type="text" id="paintingName" name="paintingName"/>
+        <label for="width">Width:</label><input type="text" id="width" name="width"/>
+        <label for="height">Height:</label><input type="text" id="height" name="height"/>
+        <label for="price">Price:</label><input type="text" id="price" name="price"/>
+        <label for="description">Description:</label><textarea id="description" name="description"></textarea>
+        <input type="file" name="myimage" accept="image/*">
+        <input type="submit" value="Submit">
     </form>
     <?php
     $sqlGetOrders = "SELECT * FROM `ArtworkSystemOrders`";
@@ -79,31 +83,33 @@ if ($_SESSION["pass"]) {
 
     if ($result->num_rows > 0) {
         ?>
-        <h3>Orders</h3>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>E-mail</th>
-                <th>Address</th>
-                <th>Painting name</th>
-                <th>Painting ID</th>
-            </tr>
-            <?php
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>\n";
-                echo "<td>" . $row["id"] . "</td>\n";
-                echo "<td>" . $row["userName"] . "</td>\n";
-                echo "<td>" . $row["phone"] . "</td>\n";
-                echo "<td>" . $row["email"] . "</td>\n";
-                echo "<td>" . $row["address"] . "</td>\n";
-                echo "<td>" . $row["paintingName"] . "</td>\n";
-                echo "<td>" . $row["paintingID"] . "</td>\n";
-                echo "</tr>\n";
-            }
-            ?>
-        </table>
+        <div class="adminTable">
+            <h3>Orders</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>E-mail</th>
+                    <th>Address</th>
+                    <th>Painting name</th>
+                    <th>Painting ID</th>
+                </tr>
+                <?php
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>\n";
+                    echo "<td>" . $row["id"] . "</td>\n";
+                    echo "<td>" . $row["userName"] . "</td>\n";
+                    echo "<td>" . $row["phone"] . "</td>\n";
+                    echo "<td>" . $row["email"] . "</td>\n";
+                    echo "<td>" . $row["address"] . "</td>\n";
+                    echo "<td>" . $row["paintingName"] . "</td>\n";
+                    echo "<td>" . $row["paintingID"] . "</td>\n";
+                    echo "</tr>\n";
+                }
+                ?>
+            </table>
+        </div>
         <?php
         $sqlGetOrders = "SELECT * FROM `ArtworkSystemTrack&Trace`";
         // Handle results
@@ -113,32 +119,34 @@ if ($_SESSION["pass"]) {
         }
         if ($result->num_rows > 0) {
             ?>
-            <h3>Track & Trace bookings</h3>
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Date</th>
-                </tr>
-                <?php
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>\n";
-                    echo "<td>" . $row["id"] . "</td>\n";
-                    echo "<td>" . $row["name"] . "</td>\n";
-                    echo "<td>" . $row["phone"] . "</td>\n";
-                    echo "<td>" . $row["date"] . "</td>\n";
-                    echo "</tr>\n";
-                }
-                ?>
-            </table>
+            <div class="adminTable">
+                <h3>Track & Trace bookings</h3>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Date</th>
+                    </tr>
+                    <?php
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>\n";
+                        echo "<td>" . $row["id"] . "</td>\n";
+                        echo "<td>" . $row["name"] . "</td>\n";
+                        echo "<td>" . $row["phone"] . "</td>\n";
+                        echo "<td>" . $row["date"] . "</td>\n";
+                        echo "</tr>\n";
+                    }
+                    ?>
+                </table>
+            </div>
             <?php
             $conn->close();
         }
     }
 } else { ?>
-    <form action="admin.php" method="post">
-        <p><label for="pass"></label><input type="text" id="pass" name="pass"/><input type="submit"></p>
+    <form action="admin.php" method="post" id="adminLogin">
+        <label for="pass"></label><input type="text" id="pass" name="pass"/><input type="submit">
     </form>
     <?php
 
