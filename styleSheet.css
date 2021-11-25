@@ -69,8 +69,7 @@ form {
     border: 1vmin solid #d3d1d1;
     margin: 2vmin auto 0 auto;
     max-width: 60%;
-    padding: 1em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow:rgba(0, 0, 0, 0.15);
 }
 
 #adminLogin{
